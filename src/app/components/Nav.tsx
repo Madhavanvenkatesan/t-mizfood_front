@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { IoMenu } from "react-icons/io5";
 import { BiSearchAlt } from "react-icons/bi";
 import { FaClipboardList } from "react-icons/fa";
@@ -10,8 +11,7 @@ export default function Nav() {
             {/* Left Section */}
             <div className="flex items-center space-x-10">
                 <Link href="/" className="text-primary dark:text-primary-dark">
-                    {/* <Image src="/Logo-T-MIZFOOD-2.png" alt="Logo" width={150} height={50} /> */}
-                    <img src="/Logo-T-MIZFOOD-2.png" alt="Logo" className="h-10 w-auto" />
+                    <Image src="/Logo-T-MIZFOOD-2.png" alt="Logo" width={150} height={50} className="h-10 w-auto"/>
                 </Link>
                 <Link
                     href="/Rayons"
