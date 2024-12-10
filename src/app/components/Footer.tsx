@@ -35,11 +35,11 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-wrap justify-between items-start p-10 bg-gray-900 rounded-tl-md rounded-tr-md gap-10">
-                    <div className="flex flex-col ">
+                <div className="flex flex-wrap flex-col md:flex-row justify-between items-start p-10 bg-gray-900 rounded-tl-md rounded-tr-md gap-10">
+                    {/* <div className="flex flex-col ">
                         <Image src="/Logo_simple.svg" alt="logo" width={63} height={35} className="h-6 w-auto"/>
                         <h2 className="text-white font-bold text-xl mt-4">T-Mizfood</h2>
-                    </div>
+                    </div> */}
                     <div className="flex flex-col gap-1">
                         <h3 className="font-bold pb-4">Contacts</h3>
                         <div className="flex gap-3"><IoCallOutline /><span className=" hover:text-red-300">07 88 22 55 19</span></div>

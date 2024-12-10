@@ -1,13 +1,10 @@
-
-import React from 'react';
-
 interface ButtonProps {
-    text: string; // Button text
-    onClick?: () => void; // Click handler
-    type?: "button" | "submit" | "reset"; // Button type
-    variant?: "primary" | "secondary" | "danger"; // Button style variant
-    disabled?: boolean; // Disabled state
-    className?: string; // Additional CSS classes to be applied to the button element
+    text: string; 
+    onClick?: () => void; 
+    type?: "button" | "submit" | "reset"; 
+    variant?: "primary" | "secondary" | "danger"; 
+    disabled?: boolean; 
+    className?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -31,8 +28,7 @@ const Button: React.FC<ButtonProps> = ({
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={`${baseStyles} ${variantStyles[variant]} ${className} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
-        >
+            className={`${baseStyles} ${variantStyles[variant]} ${className} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}>
             {text}
         </button>
     );
