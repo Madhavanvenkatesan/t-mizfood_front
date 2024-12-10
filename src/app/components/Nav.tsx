@@ -17,11 +17,11 @@ export default function Nav() {
         setSideBarOpen(!isSideBarOpen);
     };
     return (
-        <div className="relative flex flex-wrap justify-between items-center w-full px-4 py-2 bg-gray-0 shadow-md dark:bg-gray-800">
+        <div className="relative flex flex-wrap justify-between items-center w-full px-4 py-2 bg-gray-0 shadow-md dark:bg-gray-800 z-10">
             {/* Left Section */}
-            <div className="flex items-center space-x-10">
+            <div className="flex items-center space-x-5">
                 <Link href="/" className="text-primary dark:text-primary-dark">
-                    <Image src="/LOGO_T-MIZFOOD.svg" alt="Logo" width={150} height={50} priority className="h-10 w-auto" />
+                    <Image src="/Logo.png" alt="Logo" width={152} height={691}/>
                 </Link>
                 <button
                     onClick={toggleSideBar}
@@ -55,7 +55,7 @@ export default function Nav() {
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="w-full input-field"
+                        className="w-full input-field text-sm"
                     />
                     <button
                         type="submit"

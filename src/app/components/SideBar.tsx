@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from 'next/navigation';
+import { IoIosArrowForward } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -54,11 +56,14 @@ const SIDENAV_ITEMS: SideNavItem[] = [
 export default function SideBar({ isOpen, toggleSidebar }: SidebarProps) {
 
     return (
-        <div className="fixed flex left-0 top-14 w-full h-[calc(100vh-3.5rem)]">
-            {isOpen &&( <button onClick={toggleSidebar}>x</button>)}
-            <div className="w-4/5 sm:w-2/3 md:w-80 px-4 py-2 bg-white shadow-md dark:bg-gray-800 overflow-scroll">
-                <h1>Rayons</h1>
-                <div className="flex flex-col w-full">
+        <div className="fixed flex left-0 top-12 w-full h-[calc(100vh-3rem)]">
+
+            <div className="w-4/5 sm:w-2/3 md:w-80 bg-white shadow-md dark:bg-gray-800 overflow-scroll">
+                <h2 className="flex justify-between w-full pl-4 p-2 shadow-sm">
+                    <span className="font-bold">Rayons</span>
+                    {isOpen && (<button className="p-2 rounded-full hover:bg-red-500 hover:text-white" onClick={toggleSidebar}><IoClose /></button>)}
+                </h2>
+                <div className="flex flex-col w-full px-2">
                     {SIDENAV_ITEMS.map((item, idx) => {
                         return <MenuItem key={idx} item={item} />;
                     })}
@@ -85,9 +90,10 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
                 <>
                     <button
                         onClick={toggleSubMenu}
-                        className="flex flex-row items-center w-full justify-between">
-                        <div className="flex flex-row space-x-4 p-2 items-center">
-                            <span className="text-sm flex">{item.title}</span>
+                        className="flex flex-row items-center w-full justify-between rounded-lg hover:bg-red-500 hover:text-white">
+                        <div className="flex flex-row space-x-4 p-1 pl-2  items-center justify-between w-full">
+                            <span className="text-sm flex ">{item.title}</span>
+                            <IoIosArrowForward className={`transform transition-transform duration-300 ${subMenuOpen ? "rotate-90" : ""}`} />
                         </div>
                     </button>
 
@@ -98,10 +104,10 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
                                     <Link
                                         key={idx}
                                         href={subItem.path}
-                                        className={`${subItem.path === pathname ? 'font-bold' : ''
-                                            }`}
+                                        className={`rounded-lg hover:bg-red-500 hover:text-white ${subItem.path === pathname ? 'font-bold' : ''
+                                            } `}
                                     >
-                                        <span className="text-sm p-2 px-4 flex">{subItem.title}</span>
+                                        <span className="text-sm p-1 px-4 flex">{subItem.title}</span>
                                     </Link>
                                 );
                             })}
@@ -111,7 +117,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
             ) : (
                 <Link
                     href={item.path}
-                    className="flex flex-row space-x-4 items-center p-2 rounded-lg">
+                    className="flex flex-row space-x-4 items-center p-1 pl-2 rounded-lg  hover:bg-red-500 hover:text-white">
                     <span className="text-sm flex">{item.title}</span>
                 </Link>
             )}

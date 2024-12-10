@@ -1,5 +1,6 @@
 "use client"
 
+import Button from "../components/Button";
 import { useState } from "react";
 
 interface FormData {
@@ -42,44 +43,59 @@ export default function Login() {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email" >
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div >
-                    <label htmlFor="password" className="">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <button
-                        type="submit"
-                        className="w-full py-2 px-4 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Login
-                    </button>
-                </div>
-            </form>
+        <div className="flex justify-center items-center h-[calc(100vh-6rem)] md:h-[calc(100vh-3rem)] bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+                <h1 className="text-2xl font-semibold text-center mb-6">Login</h1>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label
+                            htmlFor="email"
+                            className="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="password"
+                            className="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200"
+                        />
+                    </div>
+                    <div>
+                        <a href="#" className="text-sm  text-gray-700 hover:text-blue-600">
+                            Forgot your password?
+                        </a>
+                    </div>
+                    <div>
+                        <Button
+                            text="Login"
+                            type="submit"
+                            variant="danger"
+                            className="w-full"
+                        />
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

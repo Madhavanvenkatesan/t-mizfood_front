@@ -32,3 +32,4 @@ body {
   @apply w-full px-4 py-1 border rounded-md shadow-sm focus:ring-1 focus:ring-gray-400 focus:outline-none 
     bg-white text-gray-700 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:placeholder-gray-400;
 }
+  
