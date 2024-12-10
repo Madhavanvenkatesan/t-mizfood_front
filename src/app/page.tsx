@@ -17,9 +17,9 @@ export default function Home() {
 
   ];
 
-  const handleAddToList = (productName: string) => {
-    console.log(`${productName} added to the list!`);
-  };
+  // const handleAddToList = (productName: string) => {
+  //   console.log(`${productName} added to the list!`);
+  // };
 
 
   return (
@@ -32,7 +32,7 @@ export default function Home() {
         productName={product.productName}
         description={product.description}
         price={product.price}
-        onAddToList={() => handleAddToList(product.productName)} // Passing the specific product name
+        // onAddToList={() => handleAddToList(product.productName)} // Passing the specific product name
       />
     ))}
   </div>

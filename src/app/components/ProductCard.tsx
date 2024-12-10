@@ -7,7 +7,7 @@ interface ProductCardProps {
     productName: string; // Name of the product
     description: string; // Description of the product
     price: string; // Product price
-    onAddToList: () => void; // Function to handle "Add to List" action
+    // onAddToList: () => void; // Function to handle "Add to List" action
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -16,7 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     productName,
     description,
     price,
-    onAddToList,
+    // onAddToList,
 }) => {
     return (
         <div className=" flex flex-row sm:flex-col bg-white rounded-lg shadow-lg p-3 w-full sm:w-64 h-90">
