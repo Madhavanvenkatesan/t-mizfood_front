@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import ProductCard from "./components/ProductCard";
 
 export default function Home() {
@@ -23,18 +24,21 @@ export default function Home() {
 
 
   return (
-    <div className="flex justify-center items-center flex-wrap gap-4 p-1 sm:p-8">
-    {array.map((product, idx) => (
-      <ProductCard
-        key={idx} // Important to add a unique key for each item
-        category="Fresh"
-        brand={product.brand}
-        productName={product.productName}
-        description={product.description}
-        price={product.price}
-        // onAddToList={() => handleAddToList(product.productName)} // Passing the specific product name
-      />
-    ))}
-  </div>
+    <div className="flex justify-center items-center flex-wrap gap-4 p-1 sm:p-8 max-w-7xl">
+      {array.map((product, idx) => (
+        <Link href="/Product"
+            // Important to add a unique key for each item
+          key={idx}>
+          <ProductCard
+            category="Fresh"
+            brand={product.brand}
+            productName={product.productName}
+            description={product.description}
+            price={product.price}
+          // onAddToList={() => handleAddToList(product.productName)} // Passing the specific product name
+          />
+        </Link>
+      ))}
+    </div>
   );
 }
