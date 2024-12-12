@@ -1,44 +1,40 @@
-"use client"
-
 import Link from "next/link";
 import ProductCard from "./components/ProductCard";
-
-export default function Home() {
-  // Sample data for products
-  const array = [
-    { category: 'Fresh', brand: 'Brand A', productName: 'Organic Apple', description: 'Fresh organic apples harvested from the farm.', price: '$3.99' },
-    { category: 'Freezer', brand: 'Brand B', productName: 'Frozen Salmon', description: 'Frozen wild-caught salmon fillets.', price: '$15.99' },
-    { category: 'Fresh', brand: 'Brand C', productName: 'Fresh Strawberries', description: 'Juicy fresh strawberries packed for your convenience.', price: '$5.99' },
-    { category: 'Fresh', brand: 'Brand A', productName: 'Organic Apple', description: 'Fresh organic apples harvested from the farm.', price: '$3.99' },
-    { category: 'Freezer', brand: 'Brand B', productName: 'Frozen Salmon', description: 'Frozen wild-caught salmon fillets.', price: '$15.99' },
-    { category: 'Fresh', brand: 'Brand C', productName: 'Fresh Strawberries', description: 'Juicy fresh strawberries packed for your convenience.', price: '$5.99' },
-    { category: 'Fresh', brand: 'Brand A', productName: 'Organic Apple', description: 'Fresh organicFresh organic apples harvested from thFresh organic apples harvested from th apples harvested from the farm.', price: '$3.99' },
-    { category: 'Freezer', brand: 'Brand B', productName: 'Frozen Salmon', description: 'Frozen wild-caught salmon fillets.', price: '$15.99' },
-    { category: 'Fresh', brand: 'Brand C', productName: 'Fresh Strawberries', description: 'Juicy fresh strawberries packed for your convenience.', price: '$5.99' },
-
-  ];
-
-  // const handleAddToList = (productName: string) => {
-  //   console.log(`${productName} added to the list!`);
-  // };
+import Product from "./types";
 
 
+
+// This function will fetch products when the component is rendered on the server
+async function getProducts(): Promise<Product[]> {
+  const response = await fetch("https://dummyjson.com/products");
+  const data = await response.json();
+  return data.products; // Return the array of products
+} 
+
+// Define the Home page component that renders a list of products
+const Home = async () => {
+  const products = await getProducts();
   return (
+    <div className="w-full flex justify-center items-center">
     <div className="flex justify-center items-center flex-wrap gap-4 p-1 sm:p-8 max-w-7xl">
-      {array.map((product, idx) => (
-        <Link href="/Product"
-            // Important to add a unique key for each item
-          key={idx}>
-          <ProductCard
-            category="Fresh"
-            brand={product.brand}
-            productName={product.productName}
-            description={product.description}
-            price={product.price}
-          // onAddToList={() => handleAddToList(product.productName)} // Passing the specific product name
-          />
-        </Link>
-      ))}
+      {products.length > 0 ? (
+        products.map((product) => (
+          <Link href={`/Product/${product.id}`} key={product.id}>
+            <ProductCard
+              category={product.category}
+              brand={product.brand}
+              productName={product.title}
+              description={product.description}
+              price={product.price}
+            />
+          </Link>
+        ))
+      ) : (
+        <p>No products available.</p>
+      )}
+    </div>
     </div>
   );
-}
+};
+
+export default Home;
