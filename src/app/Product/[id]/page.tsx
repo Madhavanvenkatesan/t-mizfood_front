@@ -12,10 +12,11 @@ const fetchProduct = async (id: string): Promise<productProbs> => {
 };
 
 // Define the Product page component
-export default async function ProductDetails({ params }: any) {
+export default async function ProductDetails({ params }:{params: { id: string}}) {
     const { id } = await params;
     try {
         const product = await fetchProduct(id);
+
         return (
             <div className="flex flex-col sm:flex-row h-[120vh] sm:h-[70vh] md:h-[80vh] w-full max-w-7xl p-5 gap-4">
                 {/* Product Image */}
