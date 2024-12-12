@@ -12,8 +12,8 @@ const fetchProduct = async (id: string): Promise<productProbs> => {
 };
 
 // Define the Product page component
-const ProductDetails = async ({ params }: { params: { id: string } }) => {
-    const { id } = params;
+export default async function ProductDetails({ params, }:{params: Promise<{ id: string }>}) {
+    const { id } =await params;
     try {
         const product = await fetchProduct(id);
 
@@ -55,5 +55,3 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
         );
     }
 };
-
-export default ProductDetails;
