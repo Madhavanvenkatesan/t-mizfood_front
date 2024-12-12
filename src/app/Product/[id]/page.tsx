@@ -12,9 +12,9 @@ const fetchProduct = async (id: string): Promise<productProbs> => {
 };
 
 // Define the Product page component
-const productDetails = async ({ params }: { params: { id: string } }) => {
+const ProductDetails = async ({ params }: { params: { id: string } }) => {
+    const { id } = params;
     try {
-        const {id} = await params;
         const product = await fetchProduct(id);
 
         return (
@@ -23,8 +23,8 @@ const productDetails = async ({ params }: { params: { id: string } }) => {
                 <div className="h-full w-full sm:w-1/2">
                     <div className="flex justify-center items-center h-full w-full bg-white rounded-md shadow-lg">
                         <Image
-                            src="/pizza.png"
-                            alt={product.title}
+                            src={"/pizza.png"} // Use dynamic image from API or fallback
+                            alt={product.title || "Product Image"}
                             width={400}
                             height={400}
                             className="h-4/5 w-auto object-contain"
@@ -34,12 +34,12 @@ const productDetails = async ({ params }: { params: { id: string } }) => {
 
                 {/* Product Details */}
                 <div className="h-full w-full sm:w-1/2">
-                    <div className="h-[50%] w-full bg-white mb-4 rounded-md shadow-lg p-2">
+                    <div className="h-[50%] w-full bg-white mb-4 rounded-md shadow-lg p-4">
                         <h2 className="text-xl font-semibold text-gray-800">{product.title}</h2>
                         <p className="text-sm text-gray-600">{product.description}</p>
                     </div>
-                    <div className="flex justify-between items-center p-2 w-full bg-white rounded-md shadow-lg">
-                        <span className="text-l font-bold text-gray-800">${product.price}</span>
+                    <div className="flex justify-between items-center p-4 w-full bg-white rounded-md shadow-lg">
+                        <span className="text-l font-bold text-gray-800">${product.price.toFixed(2)}</span>
                         <button className="bg-red-500 rounded-full text-white">
                             <IoIosAdd className="text-4xl" />
                         </button>
@@ -48,9 +48,12 @@ const productDetails = async ({ params }: { params: { id: string } }) => {
             </div>
         );
     } catch {
-        // Improved error message
-        return <div className="text-red-500">Error fetching product</div>;
+        return (
+            <div className="text-red-500 p-4">
+                <p>Error fetching product:</p>
+            </div>
+        );
     }
 };
 
-export default productDetails;
+export default ProductDetails;
