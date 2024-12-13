@@ -16,7 +16,7 @@ export default function Footer() {
     return (
         <div>
             <footer className="flex flex-col sticky bottom-0 w-full text-sm text-white">
-                <div className="flex flex-col justify-between items-center bg-slate-50 rounded-tl-md rounded-tr-md shadow-sm">
+                <div className="flex flex-col justify-between items-center bg-slate-100 rounded-tl-md rounded-tr-md shadow-sm">
                     <div>
                         <Image src="/Logo1.svg" alt="logo" width={152} height={691} className="h-10 w-auto m-10" />
                     </div>
@@ -49,8 +49,8 @@ export default function Footer() {
                     </div>
                     <div className="flex flex-col gap-1">
                         <h3 className="font-bold pb-4">Accés Direct</h3>
-                        <Link href="/" className=" hover:text-red-300">Contacter nous</Link>
-                        <Link href="/" className=" hover:text-red-300">Livraison</Link>
+                        <Link href="Contact" className=" hover:text-red-300">Contacter nous</Link>
+                        <Link href="Delivery" className=" hover:text-red-300">Livraison</Link>
                         <Link href="/" className=" hover:text-red-300">Qui sommes-nous?</Link>
                         <Link href="/" className=" hover:text-red-300">Mentions Légales</Link>
                     </div>

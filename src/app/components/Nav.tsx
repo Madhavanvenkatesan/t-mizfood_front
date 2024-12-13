@@ -17,7 +17,7 @@ export default function Nav() {
         setSideBarOpen(!isSideBarOpen);
     };
     return (
-        <div className="relative flex flex-wrap justify-between items-center w-full px-4 py-2 bg-gray-0 shadow-md dark:bg-gray-800 z-10">
+        <div className="fixed flex flex-wrap justify-between items-center w-full px-4 py-2 bg-inherit shadow-md dark:bg-gray-800 z-10">
             {/* Left Section */}
             <div className="flex items-center space-x-5">
                 <Link href="/" className="text-primary dark:text-primary-dark">

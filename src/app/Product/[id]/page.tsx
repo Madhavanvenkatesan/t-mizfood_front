@@ -14,10 +14,10 @@ const fetchProduct = async (id: string): Promise<productProbs> => {
 // Define the Product page component
 export default async function ProductDetails({ params }:{params: Promise<{ id: string }>}) {
     const { id } = await params;
-    try {
-        const product = await fetchProduct(id);
-
+    const product = await fetchProduct(id);
+    if (product) {
         return (
+            <div className="w-full flex justify-center">    
             <div className="flex flex-col sm:flex-row h-[120vh] sm:h-[70vh] md:h-[80vh] w-full max-w-7xl p-5 gap-4">
                 {/* Product Image */}
                 <div className="h-full w-full sm:w-1/2">
@@ -31,7 +31,6 @@ export default async function ProductDetails({ params }:{params: Promise<{ id: s
                         />
                     </div>
                 </div>
-
                 {/* Product Details */}
                 <div className="h-full w-full sm:w-1/2">
                     <div className="h-[50%] w-full bg-white mb-4 rounded-md shadow-lg p-4">
@@ -46,8 +45,9 @@ export default async function ProductDetails({ params }:{params: Promise<{ id: s
                     </div>
                 </div>
             </div>
+            </div>
         );
-    } catch {
+    } else {
         return (
             <div className="text-red-500 p-4">
                 <p>Error fetching product:</p>

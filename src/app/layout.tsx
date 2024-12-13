@@ -27,11 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Nav />
+        <main className="pt-28 sm:pt-20 md:pt-12">     
         {children}
+        </main>
         <Footer />
       </body>
     </html>
