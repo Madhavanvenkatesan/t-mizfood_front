@@ -7,10 +7,10 @@ const MapWithNoSSR = dynamic(() => import("../components/Map"), {
 
 export default function Delivery() {
     return (
-        <div className="max-w-screen-xl mx-auto p-8 pb-12 text-gray-600 text-md md:text-sm ">
-            <div className="flex flex-col lg:flex-row gap-12 items-center ">
+        <div className="max-w-screen-xl mx-auto p-8 pb-12 text-gray-600 text-md md:text-sm -z-30">
+            <div className="flex flex-col lg:flex-row gap-12 items-start lg:items-center -z-20">
                 {/* Interactive Map */}
-                <div id="map" className="w-full lg:w-1/2 rounded-lg overflow-hidden ">
+                <div id="map" className="w-full lg:w-1/2 rounded-lg overflow-hidden -z-0">
                     <MapWithNoSSR />
                 </div>
 

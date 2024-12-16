@@ -18,7 +18,7 @@ const Map = () => {
         <MapContainer
             center={[49.37825, 2.44063]}
             zoom={7}
-            scrollWheelZoom={false}
+            scrollWheelZoom={true}
             style={{ height: "400px", width: "100%" }} // Ensure proper size
         >
             <TileLayer
@@ -26,7 +26,7 @@ const Map = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={[49.37825, 2.44063]} >
-                <Popup>Hey! You found me.</Popup>
+                <Popup>T-MIZ FOOD</Popup>
             </Marker>
             <Polygon pathOptions={limeOptions} positions={polygon} />
         </MapContainer>
