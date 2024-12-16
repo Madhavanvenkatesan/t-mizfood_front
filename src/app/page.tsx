@@ -6,7 +6,7 @@ import Product from "./types";
 
 // This function will fetch products when the component is rendered on the server
 async function getProducts(): Promise<Product[]> {
-  const response = await fetch("https://dummyjson.com/products?©limit=12");
+  const response = await fetch("https://dummyjson.com/products?limit=12");
   const data = await response.json();
   return data.products; // Return the array of products
 } 
