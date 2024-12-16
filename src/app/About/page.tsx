@@ -18,7 +18,7 @@ export default function About() {
         },
     ]
     return (
-        <div className="flex flex-col items-start md:items-center gap-12 max-w-screen-xl mx-auto p-8 pb-12 text-gray-600 text-md md:text-sm">
+        <div className="flex flex-col items-start md:items-center gap-12 max-w-screen-xl mx-auto p-2 py-4 md:p-8 pb-12 text-gray-600 text-md md:text-sm">
             <div className="max-w-screen-xl px-4  md:px-8">
                 <h1 className="text-3xl font-semibold text-red-500">
                     Qui sommes-nous?
