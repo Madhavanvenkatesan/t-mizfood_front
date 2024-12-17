@@ -1,3 +1,4 @@
+import Image from "next/image"
 export default function About() {
     const stats = [
         {
@@ -32,11 +33,14 @@ export default function About() {
             </div>
             <div className="max-w-screen-xl p-4 gap-x-12 items-start justify-between lg:flex md:px-8 bg-white rounded-xl">
                 <div className="sm:hidden lg:block lg:max-w-xl rounded-lg h-96 w-full sm:w-1/2 overflow-hidden object-center ">
-                    <img
+                    <Image
                         src="/warehouse.jpg"
                         className="w-full h-full object-cover object-center"
                         alt="warehouse image"
-                    />                </div>
+                        width={100}
+                        height={100}
+                    />
+                </div>
                 <div className="mt-6 gap-12 sm:mt-0 md:flex lg:block">
                     <div className="max-w-2xl">
                         <h3 className="text-gray-800 text-2xl font-semibold sm:text-xl">

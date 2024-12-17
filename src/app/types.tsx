@@ -6,3 +6,9 @@ export default interface productProbs {
     description: string;
     price: number;
 }
+export default interface productCategoryProbs {
+    products: productProbs[];
+    total: number;
+    skip: number;
+    limit: number;
+}
