@@ -33,7 +33,7 @@ export default function SideBar({ isOpen, toggleSidebar }: SidebarProps) {
             // Convert API data to SideNavItem format
             const formattedMenuItems: SideNavItem[] = data.map((category) => ({
                 title: category.name,
-                path: `http://localhost:3000/Product/category/${category.name}`,
+                path: `/Product/category/${category.name}`,
             }));
 
             setMenuItems(formattedMenuItems);
