@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Nav />
-        <main className="pt-28 sm:pt-20 md:pt-12">     
+        <main className="pt-24 sm:pt-20 md:pt-12">     
         {children}
         </main>
         <Footer />

@@ -43,7 +43,7 @@ export default function Login() {
     };
 
     return (
-        <div className="flex justify-center items-center h-[calc(100vh-6rem)] md:h-[calc(100vh-3rem)] bg-gray-100">
+        <div className="flex justify-center items-center h-[calc(100vh-6rem)] md:h-[calc(100vh-3rem)]">
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
                 <h1 className="text-2xl font-semibold text-center mb-6">Login</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -61,7 +61,7 @@ export default function Login() {
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200"
+                            className="w-full px-3 py-2 border rounded-md text-md focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200"
                         />
                     </div>
                     <div>
@@ -78,7 +78,7 @@ export default function Login() {
                             value={formData.password}
                             onChange={handleChange}
                             required
-                            className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200"
+                            className="w-full px-3 py-2 border rounded-md text-md focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200"
                         />
                     </div>
                     <div>

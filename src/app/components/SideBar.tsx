@@ -118,7 +118,7 @@ const MenuItem = ({ item, onClick }: { item: SideNavItem, onClick: () => void; }
                     className="flex flex-row space-x-4 items-center p-1 pl-2 rounded-lg hover:bg-red-500 hover:text-white"
                     onClick={handleLinkClick}
                 >
-                    <span className="text-sm font-semibold">{item.title}</span>
+                    <span className="text-sm py-2 md:py-1 font-semibold">{item.title}</span>
                 </Link>
             )}
         </div>
