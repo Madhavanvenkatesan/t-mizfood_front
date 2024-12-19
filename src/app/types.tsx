@@ -12,3 +12,10 @@ export default interface productCategoryProbs {
     skip: number;
     limit: number;
 }
+
+export type SideNavItem = {
+    title: string;
+    path: string;
+    submenu?: boolean;
+    subMenuItems?: SideNavItem[];
+};

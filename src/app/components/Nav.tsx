@@ -8,14 +8,43 @@ import { BiSearchAlt } from "react-icons/bi";
 import { FaClipboardList } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
 import SideBar from "./SideBar";
-
+import { useEffect } from "react";
+import { SideNavItem } from "../types";
 
 export default function Nav() {
-    
+
+    // Fetch menu items from API for category
+    const [menuItems, setMenuItems] = useState<SideNavItem[]>([]);
+
+    const fetchMenuItems = async () => {
+        try {
+            const res = await fetch('https://dummyjson.com/products/categories');
+            if (!res.ok) throw new Error("Failed to fetch categories");
+
+            const data: { name: string }[] = await res.json();
+
+            // Convert API data to SideNavItem format
+            const formattedMenuItems: SideNavItem[] = data.map((category) => ({
+                title: category.name,
+                path: `/Product/category/${category.name}`,
+            }));
+
+            setMenuItems(formattedMenuItems);
+        } catch (error) {
+            console.error("Error fetching menu items:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchMenuItems();
+    }, []); // Fetch data when the component mounts
+
+
     const [isSideBarOpen, setSideBarOpen] = useState(false);
     const toggleSideBar = () => {
         setSideBarOpen(!isSideBarOpen);
     };
+
     return (
         <div className="fixed z-10 flex flex-wrap justify-between items-center w-full px-4 py-2 bg-white shadow-md dark:bg-gray-800">
             {/* Left Section */}
@@ -55,7 +84,7 @@ export default function Nav() {
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="w-full input-field text-sm"
+                        className="w-full input-field text-md"
                     />
                     <button
                         type="submit"
@@ -67,7 +96,7 @@ export default function Nav() {
             </div>
             {/* Sidebar */}
             {isSideBarOpen && (
-                <SideBar isOpen={isSideBarOpen} toggleSidebar={toggleSideBar} />
+                <SideBar isOpen={isSideBarOpen} toggleSidebar={toggleSideBar} menuItems={menuItems}/>
             )}
         </div>
 

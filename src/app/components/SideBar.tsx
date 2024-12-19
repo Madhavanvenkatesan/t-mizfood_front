@@ -1,50 +1,20 @@
 'use client';
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname } from 'next/navigation';
 import { IoIosArrowForward } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
+import { SideNavItem } from "../types";
 
 interface SidebarProps {
     isOpen: boolean;
     toggleSidebar: () => void;
+    menuItems: SideNavItem[];
 }
 
-type SideNavItem = {
-    title: string;
-    path: string;
-    submenu?: boolean;
-    subMenuItems?: SideNavItem[];
-};
+export default function SideBar({ isOpen, toggleSidebar, menuItems }: SidebarProps) {
 
-export default function SideBar({ isOpen, toggleSidebar }: SidebarProps) {
-
-    const [menuItems, setMenuItems] = useState<SideNavItem[]>([]);
-
-    // Fetch data from API
-    const fetchMenuItems = async () => {
-        try {
-            const res = await fetch('https://dummyjson.com/products/categories');
-            if (!res.ok) throw new Error("Failed to fetch categories");
-
-            const data: { name: string }[] = await res.json();
-
-            // Convert API data to SideNavItem format
-            const formattedMenuItems: SideNavItem[] = data.map((category) => ({
-                title: category.name,
-                path: `/Product/category/${category.name}`,
-            }));
-
-            setMenuItems(formattedMenuItems);
-        } catch (error) {
-            console.error("Error fetching menu items:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchMenuItems();
-    }, []); // Fetch data when the component mounts
 
     return (
         <div className="fixed flex left-0 top-12 w-full h-[calc(100vh-3rem)]">
