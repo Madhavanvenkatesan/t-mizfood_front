@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 </div>
                 <div>
                     <Image
-                        src="/pizza.png" // This is a placeholder image
+                        src="/pizza.png"
                         alt="Product Image"
                         width={100}
                         height={100}
@@ -43,14 +43,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 </div>
                 <div className="flex justify-between items-center pt-1">
                     <span className="text-l font-bold text-gray-800">${price.toFixed(2)}</span> {/* Format price with currency */}
-                    {onAddToList && (
+                    {/* {onAddToList && ( */}
                         <button
-                            onClick={onAddToList} // Trigger the add to list action if provided
-                            className="bg-red-500 rounded-full text-white p-2"
+                            onClick={onAddToList}
+                            className="bg-red-500 rounded-full text-white"
                         >
                             <IoIosAdd className="text-4xl" />
                         </button>
-                    )}
+                    {/* )} */}
                 </div>
             </div>
         </div>

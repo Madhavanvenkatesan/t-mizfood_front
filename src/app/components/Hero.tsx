@@ -26,7 +26,7 @@ const HeroSection = () => {
                         }
                         type="button"
                         variant="secondary"
-                        className="flex items-center justify-center gap-2 px-3 py-2 bg-yellow-500 text-white hover:text-black font-medium rounded-md hover:bg-yellow-400 transition-all duration-300 focus:ring-2 focus:ring-yellow-300 focus:outline-none"
+                        className="flex items-center justify-center gap-2 px-3 py-2 bg-yellow-500 text-slate-100 font-semibold hover:text-slate-600 rounded-md hover:bg-yellow-400 transition-all duration-300 focus:ring-2 focus:ring-yellow-300 focus:outline-none"
                         />
                 </a>
             </div>

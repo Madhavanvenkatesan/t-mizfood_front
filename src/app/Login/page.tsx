@@ -1,7 +1,10 @@
-"use client"
+"use client";
 
+import apiClient from "../../../utils/apiClient";
 import Button from "../components/Button";
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
 
 interface FormData {
     email: string;
@@ -9,11 +12,13 @@ interface FormData {
 }
 
 export default function Login() {
-
     const [formData, setFormData] = useState<FormData>({
         email: "",
         password: "",
     });
+
+    const { login } = useAuth(); // Access login function from AuthProvider
+    const { setUser } = useUser(); // Set user data in UserProvider
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -23,22 +28,14 @@ export default function Login() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:3333/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log("loged in successfully:", data.user);
-            } else {
-                const errorData = await response.json();
-                console.error("login failed:", errorData);
-            }
+            const response = await apiClient.post("/login", formData);
+            console.log(response.data.message);
+            console.log(response.data.user.firstName);
+
+            setUser(response.data.user); // Store user in UserProvider
+            login(); // Update authentication state
         } catch (error) {
-            console.error("An error occurred:", error);
+            console.error("Login failed:", error);
         }
     };
 
