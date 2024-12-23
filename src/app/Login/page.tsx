@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import apiClient from "../../../utils/apiClient";
-import Button from "../components/Button";
-import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { useUser } from "@/context/UserContext";
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import apiClient from '@/services/apiClient';
+import Button from '../components/Button';
+import { useAuth } from '@/context/AuthContext';
 
 interface FormData {
     email: string;
@@ -13,12 +13,13 @@ interface FormData {
 
 export default function Login() {
     const [formData, setFormData] = useState<FormData>({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     });
+    const [loading, setLoading] = useState(false);
+    const router = useRouter(); // Access router for navigation
 
     const { login } = useAuth(); // Access login function from AuthProvider
-    const { setUser } = useUser(); // Set user data in UserProvider
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -27,15 +28,27 @@ export default function Login() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true); // Start loading
         try {
-            const response = await apiClient.post("/login", formData);
-            console.log(response.data.message);
-            console.log(response.data.user.firstName);
+            const response = await apiClient.post('/login', formData);
+            const { user } = response.data;
 
-            setUser(response.data.user); // Store user in UserProvider
-            login(); // Update authentication state
+            // Call the login function from AuthContext to update user state
+            login(user);
+
+            // Clear the form fields
+            setFormData({
+                email: '',
+                password: '',
+            });
+            // Redirect to the last visited page or home page
+            const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/';
+            router.push(lastVisitedPage);
         } catch (error) {
-            console.error("Login failed:", error);
+            console.error('Login failed:', error);
+            alert('Invalid credentials');
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
@@ -79,16 +92,17 @@ export default function Login() {
                         />
                     </div>
                     <div>
-                        <a href="#" className="text-sm  text-gray-700 hover:text-blue-600">
+                        <a href="#" className="text-sm text-gray-700 hover:text-blue-600">
                             Forgot your password?
                         </a>
                     </div>
                     <div>
                         <Button
-                            text="Login"
+                            text={loading ? 'Logging in...' : 'Login'}
                             type="submit"
                             variant="danger"
                             className="w-full"
+                            disabled={loading} // Disable button while loading
                         />
                     </div>
                 </form>
