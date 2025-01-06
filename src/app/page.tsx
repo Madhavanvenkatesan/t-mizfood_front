@@ -22,7 +22,7 @@ const Home = async () => {
       <div className="flex justify-center items-center flex-wrap gap-4 p-1 sm:p-8 max-w-7xl">
         {products.length > 0 ? (
           products.map((product) => (
-            <Link href={`/Product/${product.id}`} key={product.id}>
+            <Link href={`/Product/${product.category}/${product.id}`} key={product.id}>
               <ProductCard
                 category={product.category}
                 brand={product.brand}

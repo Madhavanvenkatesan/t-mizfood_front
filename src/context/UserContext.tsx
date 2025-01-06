@@ -1,6 +1,6 @@
-'use client';
-
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback, ReactNode } from 'react';
+import apiClient from '../services/apiClient';
+import { useAuth } from './AuthContext';
 
 // Define types for user and context
 interface User {
@@ -15,39 +15,66 @@ interface UserContextType {
     user: User | null;
     fetchUser: () => Promise<void>;
     setUser: (user: User | null) => void;
+    handleLogout: () => void;
 }
 
-// Create context
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// Provider component
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+    const { isAuthenticated, loading, accessToken } = useAuth();
     const [user, setUser] = useState<User | null>(null);
 
-    const fetchUser = async () => {
+    // Memoize the fetchUser function to prevent unnecessary re-renders
+    const fetchUser = useCallback(async () => {
+        if (loading || !isAuthenticated || !accessToken) {
+            return;
+        }
+
         try {
-            const storedUser = localStorage.getItem('user');
-            if (storedUser) {
-                setUser(JSON.parse(storedUser)); // Load user from localStorage
+            const response = await apiClient.get('/me', {
+                headers: { Authorization: `Bearer ${accessToken}` }
+            });
+            if (response.status === 200) {
+                const userData = response.data.user;
+                setUser(userData);
+                localStorage.setItem('user', JSON.stringify(userData));
+            } else {
+                console.error('Failed to fetch user:', response.statusText);
+                setUser(null);
             }
         } catch (error) {
             console.error('Failed to fetch user:', error);
             setUser(null);
         }
-    };
+    }, [loading, isAuthenticated, accessToken]); // Dependencies for fetchUser function
 
+    // Initialize user state from localStorage on app load
     useEffect(() => {
-        fetchUser(); // Fetch user on mount
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
     }, []);
 
+    // Fetch user only when authenticated, not loading, and accessToken is available
+    useEffect(() => {
+        if (!loading && isAuthenticated && accessToken) {
+            fetchUser();
+        }
+    }, [isAuthenticated, loading, accessToken, fetchUser]); // Correct dependencies
+
+    const handleLogout = () => {
+        setUser(null);
+        localStorage.removeItem('user');
+    };
+
     return (
-        <UserContext.Provider value={{ user, fetchUser, setUser }}>
+        <UserContext.Provider value={{ user, fetchUser, setUser, handleLogout }}>
             {children}
         </UserContext.Provider>
     );
 };
 
-// Custom hook to use UserContext
 export const useUser = () => {
     const context = useContext(UserContext);
     if (!context) {

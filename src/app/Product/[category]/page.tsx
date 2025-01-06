@@ -1,10 +1,11 @@
-import productCategoryProbs from "../../../types";
+import productCategoryProbs from "../../types";
 import Link from "next/link";
-import ProductCard from "../../../components/ProductCard";
+import ProductCard from "../../components/ProductCard";
 
 // Fetch product data
-const fetchProduct = async (cat: string): Promise<productCategoryProbs[]> => {
-    const response = await fetch(`https://dummyjson.com/products/category/${cat}`);
+const fetchProduct = async (category: string): Promise<productCategoryProbs[]> => {
+    const response = await fetch(`https://dummyjson.com/products/category/${category}`);
+    console.log(response);
     if (!response.ok) {
         throw new Error("Failed to fetch product");
     }
@@ -13,9 +14,9 @@ const fetchProduct = async (cat: string): Promise<productCategoryProbs[]> => {
 };
 
 // Define the Product page component
-export default async function ProductDetails({ params }: { params: Promise<{ cat: string }> }) {
-    const { cat } = await params;
-    const products = await fetchProduct(cat);
+export default async function ProductDetails({ params }: { params: Promise<{ category: string }> }) {
+    const { category } = await params;
+    const products = await fetchProduct(category);
     console.log(products);
     if (products) {
         return (
@@ -23,7 +24,7 @@ export default async function ProductDetails({ params }: { params: Promise<{ cat
                 <div className="flex justify-center items-center flex-wrap gap-4 p-1 sm:p-8 max-w-7xl">
                     {products.length > 0 ? (
                         products.map((product) => (
-                            <Link href={`/Product/${product.id}`} key={product.id}>
+                            <Link href={`/Product/${category}/${product.id}`} key={product.id}>
                                 <ProductCard
                                     category={product.category}
                                     brand={product.brand}

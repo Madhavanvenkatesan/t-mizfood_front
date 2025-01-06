@@ -4,17 +4,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { IoMenu } from "react-icons/io5";
-import { BiSearchAlt } from "react-icons/bi";
 import { FaClipboardList } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 import SideBar from "./SideBar"; // Assuming you have a SideBar component
+import SearchBar from "./SearchBar"; // Assuming you have a SearchBar component
 import { SideNavItem } from "../types";
 import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
 
 export default function Nav() {
-    const { isAuthenticated, user, logout } = useAuth(); // Use AuthContext for authentication
+    const { isAuthenticated, logout } = useAuth(); // Use AuthContext for authentication
+    const { user, handleLogout, fetchUser } = useUser();
+    useEffect(() => {
+        fetchUser(); // Fetch user data when the component mounts
+    }, [fetchUser]);
 
     // Fetch menu items from API for categories
     const [menuItems, setMenuItems] = useState<SideNavItem[]>([]);
@@ -29,7 +34,7 @@ export default function Nav() {
             // Convert API data to SideNavItem format
             const formattedMenuItems: SideNavItem[] = data.map((category) => ({
                 title: category.name,
-                path: `/Product/category/${category.name}`,
+                path: `/Product/${category.name}`,
             }));
 
             setMenuItems(formattedMenuItems);
@@ -99,7 +104,10 @@ export default function Nav() {
                             aria-expanded={isDropdownOpen}
                         >
                             <MdAccountCircle className="md:text-xl text-2xl" />
-                            <span className="hidden md:block">{user?.firstName}</span>
+                            <span className="hidden md:block">
+                                {user?.firstName ? user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) : ""}
+                            </span>
+
                             <IoMdArrowDropdown
                                 className={`w-4 h-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""
                                     }`}
@@ -124,6 +132,7 @@ export default function Nav() {
                                     <li
                                         onClick={() => {
                                             logout(); // Call the logout method from AuthContext
+                                            handleLogout(); // Trigger UserContext's handleLogout function to clear user data
                                             setDropdownOpen(false); // Close the dropdown
                                         }}
                                         className="px-4 py-2 text-red-600 hover:bg-gray-100 hover:rounded-lg cursor-pointer"
@@ -161,19 +170,8 @@ export default function Nav() {
 
             {/* Center Section (Search Bar) */}
             <div className="flex w-full my-3 md:absolute md:left-1/2 md:transform md:-translate-x-1/2 md:w-1/3">
-                <form className="relative w-full">
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="w-full input-field text-md"
-                    />
-                    <button
-                        type="submit"
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1"
-                    >
-                        <BiSearchAlt className="text-xl" />
-                    </button>
-                </form>
+                {/* Integrate SearchBar Component */}
+                <SearchBar />
             </div>
 
             {/* Sidebar */}

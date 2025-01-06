@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { IoIosAdd } from "react-icons/io";
-import productProbs from "../../types";
+import productProbs from "../../../types";
 
 // Fetch product data
 const fetchProduct = async (id: string): Promise<productProbs> => {

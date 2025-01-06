@@ -1,23 +1,9 @@
 "use client"
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
 
-function Profile() {
-    const { user } = useAuth();
-    const router = useRouter();
+import withAuth  from "@/middelware/withAuth";
 
-    useEffect(() => {
-        if (!user) {
-            router.push('/Login');
-        }
-    }, [router, user]);
-
-    if (!user) {
-        return <p>Loading...</p>;
-    }
-
+const Profile:React.FC = () =>  {
     return <h1>Profile Page</h1>;
 }
 
-export default Profile;
+export default withAuth(Profile);

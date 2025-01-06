@@ -2,62 +2,61 @@
 
 import React, { createContext, useState, useEffect, useContext, ReactNode } from "react";
 
-// Define types for the user and auth state
-interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    role?: string; // Optional
-}
-
+// Define types for the auth state
 interface AuthContextType {
     isAuthenticated: boolean;
-    user: User | null;
-    login: (user: User) => void;
+    accessToken: string | null;
+    login: (token: string) => void;
     logout: () => void;
+    loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Create AuthProvider to wrap the app and provide context
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [accessToken, setAccessToken] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true); // Start as loading
 
-    // Initialize user state from localStorage
+    // Check if user is authenticated from localStorage
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
+        const storedToken = localStorage.getItem("accessToken");
+        if (storedToken) {
+            setAccessToken(storedToken); // Set token if it exists
+            setIsAuthenticated(true); // User is authenticated if a valid token exists
         }
+        setLoading(false); // Ensure loading is set to false after checking localStorage
     }, []); // Runs once on mount
 
-    const login = (user: User) => {
+    // Handle login, storing the access token in localStorage
+    const login = (token: string) => {
         try {
-            setUser(user); // Update state
-            localStorage.setItem("user", JSON.stringify(user)); // Persist in localStorage
+            setAccessToken(token); // Store token in state
+            setIsAuthenticated(true); // Set user as authenticated
+            localStorage.setItem('accessToken', token);           
         } catch (error) {
             console.error("Failed to log in:", error);
         }
     };
 
+    // Handle logout, clearing the token from state and localStorage
     const logout = () => {
         try {
-            setUser(null); // Update state
-            localStorage.removeItem("user"); // Remove from localStorage
+            setAccessToken(null); // Remove token from state
+            setIsAuthenticated(false); // Set user as not authenticated
+            localStorage.removeItem("accessToken"); // Remove token from localStorage         
         } catch (error) {
             console.error("Failed to log out:", error);
         }
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, accessToken, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-// Custom hook to use AuthContext
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {

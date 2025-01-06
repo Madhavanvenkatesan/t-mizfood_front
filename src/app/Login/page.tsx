@@ -31,11 +31,10 @@ export default function Login() {
         setLoading(true); // Start loading
         try {
             const response = await apiClient.post('/login', formData);
-            const { user } = response.data;
+            const { accessToken, message } = response.data;
 
-            // Call the login function from AuthContext to update user state
-            login(user);
-
+            console.log(accessToken, message);
+            login(accessToken.token);
             // Clear the form fields
             setFormData({
                 email: '',
