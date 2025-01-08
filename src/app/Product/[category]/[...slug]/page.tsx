@@ -1,3 +1,5 @@
+
+
 import Image from "next/image";
 import { IoIosAdd } from "react-icons/io";
 import productProbs from "../../../types";
@@ -15,7 +17,6 @@ const fetchProduct = async (id: string): Promise<productProbs> => {
 
 // Define the Product page component
 export default async function ProductDetails({ params }: { params: { slug: string[] } }) {
-    // Do not await `params`. `params` is already available as an object.
     const { slug } = params;
     const id = slug[slug.length - 1]; // The last element is the `id` of the product.
 
