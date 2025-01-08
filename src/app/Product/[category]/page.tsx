@@ -24,7 +24,7 @@ export default async function ProductDetails({ params }: { params: Promise<{ cat
                 <div className="flex justify-center items-center flex-wrap gap-4 p-1 sm:p-8 max-w-7xl">
                     {products.length > 0 ? (
                         products.map((product) => (
-                            <Link href={`/Product/${category}/${product.id}`} key={product.id}>
+                            <Link href={`/product/${category}/${product.id}`} key={product.id}>
                                 <ProductCard
                                     category={product.category}
                                     brand={product.brand}

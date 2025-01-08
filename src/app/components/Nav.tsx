@@ -34,7 +34,7 @@ export default function Nav() {
             // Convert API data to SideNavItem format
             const formattedMenuItems: SideNavItem[] = data.map((category) => ({
                 title: category.name,
-                path: `/Product/${category.name}`,
+                path: `/product/${category.name}`,
             }));
 
             setMenuItems(formattedMenuItems);
@@ -81,7 +81,7 @@ export default function Nav() {
             {/* Left Section */}
             <div className="flex items-center space-x-5">
                 <Link href="/" className="text-primary dark:text-primary-dark">
-                    <Image src="/Logo.png" alt="Logo" width={152} height={691} />
+                    <Image src="/logotest.svg" alt="Logo" width={152} height={691} />
                 </Link>
                 <button
                     onClick={toggleSideBar}
@@ -121,7 +121,7 @@ export default function Nav() {
                                 className="absolute right-0 mt-4 w-48 bg-white border rounded-lg shadow-md z-10 text-sm"
                             >
                                 <ul>
-                                    <Link href="/Profile">
+                                    <Link href="/profile">
                                         <li
                                             className="px-4 py-2 hover:bg-gray-100 hover:rounded-lg cursor-pointer"
                                             onClick={() => setDropdownOpen(false)}
@@ -145,7 +145,7 @@ export default function Nav() {
                     </div>
                 ) : (
                     <Link
-                        href="/Login"
+                        href="/login"
                         className="flex items-center justify-around text-primary dark:text-primary-dark"
                     >
                         <MdAccountCircle className="md:text-xl text-2xl" />

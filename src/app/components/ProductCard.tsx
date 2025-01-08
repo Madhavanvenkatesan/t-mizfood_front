@@ -41,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     <h2 className="text-l font-semibold text-gray-800 mb-2">{productName}</h2>
                     <p className="text-sm text-gray-600 mb-4">{description}</p>
                 </div>
-                <div className="flex justify-between items-center pt-1">
+                <div className="flex justify-between items-center pt-2">
                     <span className="text-l font-bold text-gray-800">${price.toFixed(2)}</span> {/* Format price with currency */}
                     {/* {onAddToList && ( */}
                         <button

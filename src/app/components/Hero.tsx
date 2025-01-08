@@ -34,7 +34,7 @@ const HeroSection = () => {
             {/* Right Content */}
             <div className="flex-1 flex justify-center items-center relative px-12">
                 <Image
-                    src="/hero_image.svg"
+                    src="/hero.png"
                     alt="Image of a delivery service"
                     className="object-contain"
                     width={500}
