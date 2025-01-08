@@ -18,7 +18,7 @@ export default function Footer() {
             <footer className="flex flex-col sticky bottom-0 w-full text-sm text-white">
                 <div className="flex flex-col justify-between items-center bg-slate-100 rounded-tl-md rounded-tr-md shadow-sm">
                     <div>
-                        <Image src="/Logo1.svg" alt="logo" width={152} height={691} className="h-10 w-auto m-10" />
+                        <Image src="/logotest.svg" alt="logo" width={152} height={691} className="h-10 w-auto m-10" />
                     </div>
                     <div className="flex flex-col md:flex-row gap-2 justify-center w-full mb-10">
                         <div className="flex justify-center items-center gap-2 mx-10 bg-red-600 rounded-md px-4 py-2">
