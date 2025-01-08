@@ -3,7 +3,7 @@ import { IoCallOutline } from "react-icons/io5";
 import { IoMailOutline } from "react-icons/io5";
 import { IoLocationOutline } from "react-icons/io5";
 import Button from "../components/Button";
-export default function Contact(){
+export default function contact(){
 
     const contactMethods = [
         {

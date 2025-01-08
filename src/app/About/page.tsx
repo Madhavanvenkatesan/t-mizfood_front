@@ -1,5 +1,5 @@
 import Image from "next/image"
-export default function About() {
+export default function about() {
     const stats = [
         {
             data: "500+",

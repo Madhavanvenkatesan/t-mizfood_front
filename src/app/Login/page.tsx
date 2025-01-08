@@ -11,7 +11,7 @@ interface FormData {
     password: string;
 }
 
-export default function Login() {
+export default function login() {
     const [formData, setFormData] = useState<FormData>({
         email: '',
         password: '',
