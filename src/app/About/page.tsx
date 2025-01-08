@@ -34,8 +34,8 @@ export default function About() {
             <div className="max-w-screen-xl p-4 gap-x-12 items-start justify-between lg:flex md:px-8 bg-white rounded-xl">
                 <div className="sm:hidden lg:block lg:max-w-xl rounded-lg h-96 w-full sm:w-1/2 overflow-hidden object-center ">
                     <Image
-                        src="/warehouse.jpg"
-                        className="w-full h-full object-cover object-center"
+                        src="/delivery.svg"
+                        className="w-full h-full p-4 object-contain object-center"
                         alt="warehouse image"
                         width={100}
                         height={100}
