@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "lib/auth.js",
-    "src/app/loginf/page.tsx"
+    "src/app/login/page.tsx"
   ],
   "exclude": [
     "node_modules"
