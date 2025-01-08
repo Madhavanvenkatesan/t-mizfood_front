@@ -15,20 +15,19 @@ const fetchProduct = async (id: string): Promise<productProbs> => {
 
 // Define the Product page component
 export default async function ProductDetails({ params }: { params: { slug: string[] } }) {
+    // Do not await `params`. `params` is already available as an object.
     const { slug } = params;
-    // Get the `id` from the `slug` array (last element of the array)
-    const id = slug[slug.length - 1]; // The last element should be the `id`
-    console.log(params);
+    const id = slug[slug.length - 1]; // The last element is the `id` of the product.
 
     const product = await fetchProduct(id);
 
     if (product) {
         return (
-            <div className="w-full flex flex-col justify-center ">
+            <div className="w-full flex flex-col justify-center">
                 <div className="flex items-center justify-start space-x-2 text-sm text-gray-700 px-5 pt-5">
-                    <Link href="/" className=" hover:text-red-500">Home</Link>
+                    <Link href="/" className="hover:text-red-500">Home</Link>
                     <IoIosArrowForward />
-                    <Link href={`/product/${product.category}`} className=" hover:text-red-500">{product.category}</Link>
+                    <Link href={`/product/${product.category}`} className="hover:text-red-500">{product.category}</Link>
                     <IoIosArrowForward />
                     <Link href={`/product/${product.category}/${product.id}`} className="font-semibold hover:text-red-500">
                         {product.title}
