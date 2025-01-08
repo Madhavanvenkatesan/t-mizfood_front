@@ -15,9 +15,10 @@ const fetchProduct = async (id: string): Promise<productProbs> => {
 
 // Define the Product page component
 export default async function ProductDetails({ params }: { params: { slug: string[] } }) {
-    const { slug } = await params;
+    const { slug } = params;
     // Get the `id` from the `slug` array (last element of the array)
     const id = slug[slug.length - 1]; // The last element should be the `id`
+    console.log(params);
 
     const product = await fetchProduct(id);
 
