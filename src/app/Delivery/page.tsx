@@ -5,7 +5,7 @@ const MapWithNoSSR = dynamic(() => import("../components/Map"), {
     ssr: false,
 });
 
-export default function delivery() {
+export default function Delivery() {
     return (
         <div className="max-w-screen-xl mx-auto p-8 pb-12 text-gray-600 text-md md:text-sm -z-30">
             <div className="flex flex-col lg:flex-row gap-12 items-start lg:items-center -z-20">
